@@ -19,6 +19,7 @@ class EmployeeStatus(Enum):
     UNKNOWN = 'unknown'
 
 class Action(Enum):
+    IGNORE = 'ignore'
     REACTIVATE = 'reactivate'
     ADD_NOTE = 'add_note'
     ESCALATE = 'escalate'
