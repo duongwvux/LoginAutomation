@@ -11,7 +11,7 @@ class FakeTicketSystem:
         self.get_account_status_calls += 1
         return self.account_status
 
-    def add_notes(self, ticket: Ticket, note: str) -> None:
+    def add_note(self, ticket: Ticket, note: str) -> None:
         self.notes.append(note)
 
 

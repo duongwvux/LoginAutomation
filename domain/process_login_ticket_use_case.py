@@ -38,7 +38,7 @@ class ProcessLoginTicketUseCase:
             return Action.IGNORE
         account_status = self._ticket_system.get_account_status(ticket)
         if not self._detector.is_deactivation_case(is_login_issue, account_status):
-            self._ticket_system.add_notes(
+            self._ticket_system.add_note(
                 ticket,
                 f"Login issue nhưng account_status={account_status.value} - "
                 "ngoài phạm vi automation, có thể là sai password. Cần xử lý thủ công.",
@@ -55,17 +55,17 @@ class ProcessLoginTicketUseCase:
                 ticket,
                 "Tài khoản của bạn đã được kích hoạt lại. Vui lòng thử đăng nhập lại.",
             )
-            self._ticket_system.add_notes(ticket, "Đã reactivate account tự động.")
+            self._ticket_system.add_note(ticket, "Đã reactivate account tự động.")
             self._logger.log(f"Ticket {ticket.id}: reactivated tự động")
         elif action == Action.ADD_NOTE:
-            self._ticket_system.add_notes(
+            self._ticket_system.add_note(
                 ticket,
                 "Nhân sự đã nghỉ việc (terminated) - cần review thủ công trước "
                 "khi phản hồi user.",
             )
             self._logger.log(f"Ticket {ticket.id}: nhân sự đã nghỉ, ghi note chờ review")
         else:  # ESCALATE - không xác định được employee status
-            self._ticket_system.add_notes(
+            self._ticket_system.add_note(
                 ticket,
                 "Không xác định được trạng thái nhân sự - cần escalate cho người xử lý.",
             )
